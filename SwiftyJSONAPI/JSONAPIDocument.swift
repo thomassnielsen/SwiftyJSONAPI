@@ -20,38 +20,21 @@ class JSONAPIDocument: JSONPrinter {
     
     convenience init(_ json: [String:AnyObject]) {
         self.init()
-        var objects: [[String:AnyObject]] = []
-        if json["data"] is NSArray {
-            objects = json["data"] as! [[String:AnyObject]]
-        } else if json["Data"] is NSDictionary {
-            objects = [json["data"] as! [String:AnyObject]]
-        }
-        objects.forEach { (object) -> () in
+        for object in normalizeJSONAPIObjectToArray(json["data"]) {
             data.append(JSONAPIResource(object))
         }
         
-        objects.removeAll()
-        if let incl = json["included"] as? [[String:AnyObject]] {
-            objects = incl
-        } else if let incl = json["included"] as? [String:AnyObject] {
-            objects = [incl]
-        }
-        
-        objects.forEach { (object) -> () in
+        for object in normalizeJSONAPIObjectToArray(json["included"]) {
             included.append(JSONAPIResource(object))
         }
         
-        if json["links"] is NSDictionary {
-            // TODO: Rewrite with map
-            let strings = json["links"] as! [String:String]
-            var mapped: [String:NSURL] = [:]
+        if let strings = json["links"] as? [String:String] {
             for (key, value) in strings {
-                mapped[key] = NSURL(string: value)!
+                links[key] = NSURL(string: value)!
                 if key == "self" {
                     url = NSURL(string: value)!
                 }
             }
-            links = mapped
         }
     }
     
