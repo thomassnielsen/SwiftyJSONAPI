@@ -12,6 +12,7 @@ class JSONAPIDocument: JSONPrinter {
     var data: [JSONAPIResource] = []
     var links: [String:NSURL] = [:]
     var included: [JSONAPIResource] = []
+    var url: NSURL?
     
     convenience init(_ json: NSDictionary) {
         self.init(json as! [String:AnyObject])
@@ -46,6 +47,9 @@ class JSONAPIDocument: JSONPrinter {
             var mapped: [String:NSURL] = [:]
             for (key, value) in strings {
                 mapped[key] = NSURL(string: value)!
+                if key == "self" {
+                    url = NSURL(string: value)!
+                }
             }
             links = mapped
         }

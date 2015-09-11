@@ -30,10 +30,12 @@ class JSONAPIDocumentTests: XCTestCase {
 
     func testImportingDocument() {
         let document = try! JSONAPIDocument(self.testData)
-        XCTAssert(document.data.count == 1)
-        XCTAssert(document.included.count == 3, "Expected number of included documents to be 2, was \(document.included.count)")
         
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        XCTAssert(document.data.count == 1, "Expected number of data elements to be 1, was \(document.data.count)")
+        XCTAssert(document.included.count == 3, "Expected number of included documents to be 2, was \(document.included.count)")
+        XCTAssert(document.links.count == 3, "Expected number of links to be 3, was \(document.links.count)")
+        
+        XCTAssertNotNil(document.url, "Expected document to find its own URL from the provided links")
     }
 //
     func testPerformanceExample() {
