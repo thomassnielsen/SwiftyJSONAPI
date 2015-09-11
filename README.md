@@ -1,4 +1,4 @@
-# SwiftJSONAPI
+# SwiftyJSONAPI
 JSONAPI document parsing and serializing in swift.
 
 # Project status
