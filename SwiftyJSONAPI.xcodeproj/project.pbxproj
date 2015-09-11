@@ -10,6 +10,12 @@
 		E9D236D61BA2D40A00286911 /* SwiftyJSONAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = E9D236D51BA2D40A00286911 /* SwiftyJSONAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9D236DD1BA2D40A00286911 /* SwiftyJSONAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D236D21BA2D40A00286911 /* SwiftyJSONAPI.framework */; settings = {ASSET_TAGS = (); }; };
 		E9D236E21BA2D40A00286911 /* SwiftyJSONAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D236E11BA2D40A00286911 /* SwiftyJSONAPITests.swift */; };
+		E9D236ED1BA2D42C00286911 /* JSONAPIDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D236EC1BA2D42C00286911 /* JSONAPIDocument.swift */; settings = {ASSET_TAGS = (); }; };
+		E9D236EF1BA2D44700286911 /* JSONPrinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D236EE1BA2D44700286911 /* JSONPrinter.swift */; settings = {ASSET_TAGS = (); }; };
+		E9D236F11BA2D45D00286911 /* JSONAPIResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D236F01BA2D45D00286911 /* JSONAPIResource.swift */; settings = {ASSET_TAGS = (); }; };
+		E9D236F31BA2D47A00286911 /* JSONAPIRelationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D236F21BA2D47A00286911 /* JSONAPIRelationship.swift */; settings = {ASSET_TAGS = (); }; };
+		E9D236F51BA2D65900286911 /* JSONAPIDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D236F41BA2D65900286911 /* JSONAPIDocumentTests.swift */; settings = {ASSET_TAGS = (); }; };
+		E9D236F71BA2D7B900286911 /* example-document-1.json in Resources */ = {isa = PBXBuildFile; fileRef = E9D236F61BA2D7B900286911 /* example-document-1.json */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +35,12 @@
 		E9D236DC1BA2D40A00286911 /* SwiftyJSONAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyJSONAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D236E11BA2D40A00286911 /* SwiftyJSONAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSONAPITests.swift; sourceTree = "<group>"; };
 		E9D236E31BA2D40A00286911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9D236EC1BA2D42C00286911 /* JSONAPIDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIDocument.swift; sourceTree = "<group>"; };
+		E9D236EE1BA2D44700286911 /* JSONPrinter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONPrinter.swift; sourceTree = "<group>"; };
+		E9D236F01BA2D45D00286911 /* JSONAPIResource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIResource.swift; sourceTree = "<group>"; };
+		E9D236F21BA2D47A00286911 /* JSONAPIRelationship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIRelationship.swift; sourceTree = "<group>"; };
+		E9D236F41BA2D65900286911 /* JSONAPIDocumentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIDocumentTests.swift; sourceTree = "<group>"; };
+		E9D236F61BA2D7B900286911 /* example-document-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "example-document-1.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +85,10 @@
 			children = (
 				E9D236D51BA2D40A00286911 /* SwiftyJSONAPI.h */,
 				E9D236D71BA2D40A00286911 /* Info.plist */,
+				E9D236EC1BA2D42C00286911 /* JSONAPIDocument.swift */,
+				E9D236EE1BA2D44700286911 /* JSONPrinter.swift */,
+				E9D236F01BA2D45D00286911 /* JSONAPIResource.swift */,
+				E9D236F21BA2D47A00286911 /* JSONAPIRelationship.swift */,
 			);
 			path = SwiftyJSONAPI;
 			sourceTree = "<group>";
@@ -81,7 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				E9D236E11BA2D40A00286911 /* SwiftyJSONAPITests.swift */,
+				E9D236F41BA2D65900286911 /* JSONAPIDocumentTests.swift */,
 				E9D236E31BA2D40A00286911 /* Info.plist */,
+				E9D236F61BA2D7B900286911 /* example-document-1.json */,
 			);
 			path = SwiftyJSONAPITests;
 			sourceTree = "<group>";
@@ -142,6 +160,7 @@
 		E9D236C91BA2D40A00286911 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Thomas Sunde Nielsen";
 				TargetAttributes = {
@@ -183,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9D236F71BA2D7B900286911 /* example-document-1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +213,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9D236F11BA2D45D00286911 /* JSONAPIResource.swift in Sources */,
+				E9D236EF1BA2D44700286911 /* JSONPrinter.swift in Sources */,
+				E9D236F31BA2D47A00286911 /* JSONAPIRelationship.swift in Sources */,
+				E9D236ED1BA2D42C00286911 /* JSONAPIDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9D236E21BA2D40A00286911 /* SwiftyJSONAPITests.swift in Sources */,
+				E9D236F51BA2D65900286911 /* JSONAPIDocumentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +280,9 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "i386 x86_64 armv7s armv7 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -294,6 +321,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
+				VALID_ARCHS = "i386 x86_64 armv7s armv7 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -302,6 +331,7 @@
 		E9D236E71BA2D40A00286911 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -314,12 +344,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomassnielsen.SwiftyJSONAPI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E9D236E81BA2D40A00286911 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -339,8 +371,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)",
+				);
 				INFOPLIST_FILE = SwiftyJSONAPITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @loader_path/Frameworks @executable_path/Frameworks ";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomassnielsen.SwiftyJSONAPITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -350,8 +386,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)",
+				);
 				INFOPLIST_FILE = SwiftyJSONAPITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @loader_path/Frameworks @executable_path/Frameworks ";
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomassnielsen.SwiftyJSONAPITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

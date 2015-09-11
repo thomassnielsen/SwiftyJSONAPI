@@ -6,7 +6,7 @@
 //  Copyright © 2015 Thomas Sunde Nielsen. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for SwiftyJSONAPI.
 FOUNDATION_EXPORT double SwiftyJSONAPIVersionNumber;
