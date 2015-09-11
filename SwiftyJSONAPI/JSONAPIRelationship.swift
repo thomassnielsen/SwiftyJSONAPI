@@ -21,12 +21,9 @@ class JSONAPIRelationship {
                 self.url = NSURL(string: relationURL)
             }
         }
-        if let resource = data["data"] as? [String: AnyObject] {
-            resources.append(JSONAPIResource(resource))
-        } else if let objects = data["data"] as? [[String: AnyObject]] {
-            for resource in objects {
-                resources.append(JSONAPIResource(resource))
-            }
+        
+        for object in normalizeJSONAPIObjectToArray(data["data"]) {
+            resources.append(JSONAPIResource(object))
         }
     }
     

@@ -37,6 +37,14 @@ class JSONAPIDocumentTests: XCTestCase {
         
         XCTAssertNotNil(document.url, "Expected document to find its own URL from the provided links")
     }
+    
+    func testRelationships() {
+        let document = try! JSONAPIDocument(self.testData)
+        let resource = document.data.first!
+        
+        XCTAssertNotNil(resource.url, "Resources should have an URL")
+        XCTAssert(resource.relationships.count == 2, "Expected number of relationships to be 2, was \(resource.relationships.count)")
+    }
 //
     func testPerformanceExample() {
         // This is an example of a performance test case.
