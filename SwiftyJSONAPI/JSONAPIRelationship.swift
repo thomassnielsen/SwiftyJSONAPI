@@ -8,7 +8,7 @@
 
 import Foundation
 
-class JSONAPIRelationship {
+public class JSONAPIRelationship {
     var url: NSURL?
     var type = ""
     var resources: [JSONAPIResource] = []

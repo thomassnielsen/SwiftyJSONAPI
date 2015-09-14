@@ -8,7 +8,7 @@
 
 import Foundation
 
-class JSONAPIDocument: JSONPrinter {
+public class JSONAPIDocument: JSONPrinter {
     var data: [JSONAPIResource] = []
     var links: [String:NSURL] = [:]
     var included: [JSONAPIResource] = []

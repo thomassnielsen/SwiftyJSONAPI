@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum JSONAPIResourceLoaded {
+public enum JSONAPIResourceLoaded {
     case Loaded
     case Sparse // Not used
     case NotLoaded
 }
 
 
-class JSONAPIResource: JSONPrinter {
+public class JSONAPIResource: JSONPrinter {
     var id = ""
     var type = ""
     var url: NSURL?

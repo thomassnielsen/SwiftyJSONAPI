@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol JSONPrinter {
+public protocol JSONPrinter {
     func toDict() -> [String:AnyObject]
 }
 
-extension JSONPrinter {
+public extension JSONPrinter {
     func toJSONData(prettyPrinted: Bool = false) -> NSData {
         if prettyPrinted {
             return try! NSJSONSerialization.dataWithJSONObject(toDict() as NSDictionary, options: NSJSONWritingOptions.PrettyPrinted)
