@@ -14,11 +14,11 @@ public class JSONAPIDocument: JSONPrinter {
     var included: [JSONAPIResource] = []
     var url: NSURL?
     
-    convenience init(_ json: NSDictionary) {
+    public convenience init(_ json: NSDictionary) {
         self.init(json as! [String:AnyObject])
     }
     
-    convenience init(_ json: [String:AnyObject]) {
+    public convenience init(_ json: [String:AnyObject]) {
         self.init()
         for object in normalizeJSONAPIObjectToArray(json["data"]) {
             data.append(JSONAPIResource(object))
@@ -38,12 +38,12 @@ public class JSONAPIDocument: JSONPrinter {
         }
     }
     
-    convenience init(_ data: NSData) throws {
+    public convenience init(_ data: NSData) throws {
         let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
         self.init(json as! [String:AnyObject])
     }
     
-    func toDict() -> [String:AnyObject] {
+    public func toDict() -> [String:AnyObject] {
         var dict: [String:AnyObject] = [:]
         dict["data"] = data.count == 1 ? data.first!.toDict() : data.map { $0.toDict() }
         

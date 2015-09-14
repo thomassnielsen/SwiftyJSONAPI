@@ -23,11 +23,11 @@ public class JSONAPIResource: JSONPrinter {
     var relationships: [JSONAPIRelationship] = []
     var loaded = JSONAPIResourceLoaded.NotLoaded
     
-    convenience init(_ json: NSDictionary, loaded: JSONAPIResourceLoaded = .NotLoaded) {
+    public convenience init(_ json: NSDictionary, loaded: JSONAPIResourceLoaded = .NotLoaded) {
         self.init(json as! [String:AnyObject], loaded: loaded)
     }
     
-    convenience init(_ json: [String:AnyObject], loadedState: JSONAPIResourceLoaded = .NotLoaded) {
+    public convenience init(_ json: [String:AnyObject], loadedState: JSONAPIResourceLoaded = .NotLoaded) {
         self.init()
         loaded = loadedState
         
@@ -58,7 +58,7 @@ public class JSONAPIResource: JSONPrinter {
         }
     }
     
-    func toDict() -> [String:AnyObject] {
+    public func toDict() -> [String:AnyObject] {
         var dict: [String:AnyObject] = [
             "id":id,
             "type":type

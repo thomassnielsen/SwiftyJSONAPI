@@ -13,7 +13,7 @@ public class JSONAPIRelationship {
     var type = ""
     var resources: [JSONAPIResource] = []
     
-    convenience init (type: String, data: [String:AnyObject]) {
+    public convenience init (type: String, data: [String:AnyObject]) {
         self.init()
         self.type = type
         if let urls = data["links"] as? [String:String] {
@@ -27,7 +27,7 @@ public class JSONAPIRelationship {
         }
     }
     
-    func toDict() -> [String:AnyObject] {
+    public func toDict() -> [String:AnyObject] {
         var dict: [String:AnyObject] = [:]
         dict["data"] = resources.count == 1 ? resources.first!.toDict() : resources.map { $0.toDict() }
         
