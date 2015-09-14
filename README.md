@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/thomassnielsen/SwiftyJSONAPI.svg?style=svg)](https://circleci.com/gh/thomassnielsen/SwiftyJSONAPI)
+
 # SwiftyJSONAPI
 JSONAPI document representation and serializing in Swift.
 
