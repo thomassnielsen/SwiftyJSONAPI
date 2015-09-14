@@ -1,11 +1,11 @@
 # SwiftyJSONAPI
-JSONAPI document parsing and serializing in swift.
+JSONAPI document representation and serializing in Swift.
 
 # Project status
 Just begun. Work in progress. Do not use in production. Everything might and probably will change.
 
 # Goal
-Making a framework that can represent JSONAPI documents, resources and relationships as native swift objects. 
+Making a framework that can represent JSONAPI documents, resources and relationships as native swift objects.
 This framework is intended to be a starting point for other frameworks and libraries that supply features such as networking and Core Data bridging.
 
 # Contributing
