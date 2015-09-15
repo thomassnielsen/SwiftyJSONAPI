@@ -31,7 +31,6 @@
 /* Begin PBXFileReference section */
 		E9CAC0A41BA2E830003B20E5 /* JSONAPINormalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPINormalizer.swift; sourceTree = "<group>"; };
 		E9D236D21BA2D40A00286911 /* SwiftyJSONAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSONAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9D236D51BA2D40A00286911 /* SwiftyJSONAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyJSONAPI.h; sourceTree = "<group>"; };
 		E9D236D71BA2D40A00286911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9D236DC1BA2D40A00286911 /* SwiftyJSONAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyJSONAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D236E11BA2D40A00286911 /* SwiftyJSONAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSONAPITests.swift; sourceTree = "<group>"; };
@@ -84,7 +83,6 @@
 		E9D236D41BA2D40A00286911 /* SwiftyJSONAPI */ = {
 			isa = PBXGroup;
 			children = (
-				E9D236D51BA2D40A00286911 /* SwiftyJSONAPI.h */,
 				E9D236D71BA2D40A00286911 /* Info.plist */,
 				E9D236EC1BA2D42C00286911 /* JSONAPIDocument.swift */,
 				E9D236EE1BA2D44700286911 /* JSONPrinter.swift */,
