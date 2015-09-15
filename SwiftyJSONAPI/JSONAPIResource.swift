@@ -16,12 +16,14 @@ public enum JSONAPIResourceLoaded {
 
 
 public class JSONAPIResource: JSONPrinter {
-    var id = ""
-    var type = ""
-    var url: NSURL?
-    var attributes: [String:AnyObject] = [:]
-    var relationships: [JSONAPIRelationship] = []
-    var loaded = JSONAPIResourceLoaded.NotLoaded
+    public var id = ""
+    public var type = ""
+    public var url: NSURL?
+    public var attributes: [String:AnyObject] = [:]
+    public var relationships: [JSONAPIRelationship] = []
+    public var loaded = JSONAPIResourceLoaded.NotLoaded
+    
+    public init(){}
     
     public convenience init(_ json: NSDictionary, loaded: JSONAPIResourceLoaded = .NotLoaded) {
         self.init(json as! [String:AnyObject], loaded: loaded)

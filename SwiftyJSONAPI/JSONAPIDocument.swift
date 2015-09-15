@@ -9,10 +9,10 @@
 import Foundation
 
 public class JSONAPIDocument: JSONPrinter {
-    var data: [JSONAPIResource] = []
-    var links: [String:NSURL] = [:]
-    var included: [JSONAPIResource] = []
-    var url: NSURL?
+    public var data: [JSONAPIResource] = []
+    public var links: [String:NSURL] = [:]
+    public var included: [JSONAPIResource] = []
+    public var url: NSURL?
     
     public convenience init(_ json: NSDictionary) {
         self.init(json as! [String:AnyObject])
