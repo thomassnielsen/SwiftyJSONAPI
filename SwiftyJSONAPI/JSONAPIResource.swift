@@ -82,7 +82,7 @@ public class JSONAPIResource: JSONPrinter {
         return dict
     }
     
-    subscript(key: String) -> AnyObject? {
+    public subscript(key: String) -> AnyObject? {
         return attributes[key]
     }
 }
