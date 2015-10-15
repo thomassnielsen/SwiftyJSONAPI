@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		217C53B61BD042E300E82E37 /* JSONAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217C53B51BD042E300E82E37 /* JSONAPIError.swift */; settings = {ASSET_TAGS = (); }; };
 		E9CAC0A51BA2E830003B20E5 /* JSONAPINormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CAC0A41BA2E830003B20E5 /* JSONAPINormalizer.swift */; settings = {ASSET_TAGS = (); }; };
 		E9D236DD1BA2D40A00286911 /* SwiftyJSONAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D236D21BA2D40A00286911 /* SwiftyJSONAPI.framework */; settings = {ASSET_TAGS = (); }; };
 		E9D236E21BA2D40A00286911 /* SwiftyJSONAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D236E11BA2D40A00286911 /* SwiftyJSONAPITests.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		217C53B51BD042E300E82E37 /* JSONAPIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPIError.swift; sourceTree = "<group>"; };
 		E9CAC0A41BA2E830003B20E5 /* JSONAPINormalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONAPINormalizer.swift; sourceTree = "<group>"; };
 		E9D236D21BA2D40A00286911 /* SwiftyJSONAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSONAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9D236D71BA2D40A00286911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				E9D236F01BA2D45D00286911 /* JSONAPIResource.swift */,
 				E9D236F21BA2D47A00286911 /* JSONAPIRelationship.swift */,
 				E9CAC0A41BA2E830003B20E5 /* JSONAPINormalizer.swift */,
+				217C53B51BD042E300E82E37 /* JSONAPIError.swift */,
 			);
 			path = SwiftyJSONAPI;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				E9D236F11BA2D45D00286911 /* JSONAPIResource.swift in Sources */,
 				E9CAC0A51BA2E830003B20E5 /* JSONAPINormalizer.swift in Sources */,
 				E9D236EF1BA2D44700286911 /* JSONPrinter.swift in Sources */,
+				217C53B61BD042E300E82E37 /* JSONAPIError.swift in Sources */,
 				E9D236F31BA2D47A00286911 /* JSONAPIRelationship.swift in Sources */,
 				E9D236ED1BA2D42C00286911 /* JSONAPIDocument.swift in Sources */,
 			);
