@@ -13,6 +13,8 @@ public class JSONAPIDocument: JSONPrinter {
     public var links: [String:NSURL] = [:]
     public var included: [JSONAPIResource] = []
     public var url: NSURL?
+    public var meta: [String:AnyObject]?
+    public var errors: [JSONAPIError] = []
     
     public convenience init(_ json: NSDictionary) {
         self.init(json as! [String:AnyObject])
@@ -36,6 +38,11 @@ public class JSONAPIDocument: JSONPrinter {
                 }
             }
         }
+        
+        for object in normalizeJSONAPIObjectToArray(json["errors"]) {
+            errors.append(JSONAPIError(object))
+        }
+        
     }
     
     public convenience init(_ data: NSData) throws {
