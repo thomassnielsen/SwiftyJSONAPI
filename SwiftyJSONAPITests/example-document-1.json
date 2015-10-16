@@ -75,5 +75,14 @@
       "code":"Bad Request",
       "title":"Generic error title",
       "detail":"Generic error detail"
-    }]
+    }],
+    "meta": {
+        "copyright": "Copyright 2015 Example Corp.",
+        "authors": [
+                    "Yehuda Katz",
+                    "Steve Klabnik",
+                    "Dan Gebhardt",
+                    "Tyler Kellen"
+                    ]
+    }
 }

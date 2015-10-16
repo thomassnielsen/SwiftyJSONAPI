@@ -55,6 +55,16 @@ class JSONAPIDocumentTests: XCTestCase {
     
     }
     
+    func testMeta(){
+        let document = try! JSONAPIDocument(self.testData)
+        let meta = document.meta!
+        let keys = [String](meta.keys)
+    
+        XCTAssertNotNil(meta, "document should have meta information")
+        XCTAssertEqual(keys[0], "authors", "meta should contain a authors key")
+        
+    }
+    
 //
     func testPerformanceExample() {
         // This is an example of a performance test case.
