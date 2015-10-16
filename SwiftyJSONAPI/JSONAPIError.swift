@@ -15,20 +15,17 @@ public class JSONAPIError: JSONPrinter {
     public var status = ""
     public var code = ""
     public var title = ""
-    public var loaded = JSONAPIResourceLoaded.NotLoaded //needed?
 
     //TODO: add other attributes
     
     public init(){}
     
-    public convenience init(_ json: NSDictionary, loaded: JSONAPIResourceLoaded = .NotLoaded) {
-        self.init(json as! [String:AnyObject], loaded: loaded)
+    public convenience init(_ json: NSDictionary) {
+        self.init(json as! [String:AnyObject])
     }
     
-    public convenience init(_ json: [String:AnyObject], loadedState: JSONAPIResourceLoaded = .NotLoaded) {
+    public convenience init(_ json: [String:AnyObject]) {
         self.init()
-        loaded = loadedState
-        
         if let objectId = json["id"] {
             id = "\(objectId)"
         }
@@ -50,7 +47,7 @@ public class JSONAPIError: JSONPrinter {
     }
     
     public func toDict() -> [String:AnyObject] {        
-        var dict: [String:AnyObject] = [
+        let dict: [String:AnyObject] = [
             "id":id,
             "status":status,
             "code":code,
