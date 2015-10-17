@@ -9,9 +9,9 @@
 import Foundation
 
 public class JSONAPIRelationship {
-    var url: NSURL?
-    var type = ""
-    var resources: [JSONAPIResource] = []
+    public var url: NSURL?
+    public var type = ""
+    public var resources: [JSONAPIResource] = []
     
     public convenience init (type: String, data: [String:AnyObject]) {
         self.init()
