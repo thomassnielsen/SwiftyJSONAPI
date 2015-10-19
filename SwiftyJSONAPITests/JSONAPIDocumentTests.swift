@@ -47,6 +47,13 @@ class JSONAPIDocumentTests: XCTestCase {
     }
     
     func testErrors() {
+        
+        if let errorFile = NSBundle(forClass: JSONAPIDocumentTests.self).pathForResource("example-error", ofType: "json") {
+            self.testData = NSData(contentsOfFile: errorFile)
+        } else {
+            XCTFail("Could not find error test file")
+        }
+        
         let document = try! JSONAPIDocument(self.testData)
         let error = document.errors.first!
         
