@@ -1,0 +1,9 @@
+{
+    "errors": [{
+        "id": "525bf60d-eaff-4e02-bd13-572f35e0f0b5",
+        "status": "400",
+        "code": "Bad Request",
+        "title": "Generic error title",
+        "detail": "Generic error detail"
+    }]
+}
