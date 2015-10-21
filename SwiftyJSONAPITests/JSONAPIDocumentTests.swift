@@ -58,7 +58,7 @@ class JSONAPIDocumentTests: XCTestCase {
         let error = document.errors.first!
         
         XCTAssertNotNil(error.id, "Errors should have an id")
-        XCTAssertEqual(error.status,"400", "Expected error code to be 400")
+        XCTAssertEqual(error.status,"422", "Expected error code to be 422")
     
     }
     
