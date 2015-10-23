@@ -8,39 +8,6 @@
 
 import Foundation
 
-public class JSONAPIErrorSource: JSONPrinter {
-
-    public var pointer:String = ""
-    public var parameter:String = ""
-    
-    public init(){}
-    
-    public convenience init(_ json: NSDictionary) {
-        self.init(json as! [String:AnyObject])
-    }
-    
-    public convenience init(_ json: [String:AnyObject]) {
-        self.init()
-        if let objectPointer = json["pointer"] {
-            pointer = "\(objectPointer)"
-        }
-        
-        if let objectParameter = json["parameter"] {
-            parameter = "\(objectParameter)"
-        }
-        
-    }
-    
-    public func toDict() -> [String:AnyObject] {
-        let dict: [String:AnyObject] = [
-            "pointer":pointer,
-            "parameter":parameter
-        ]
-        return dict
-    }
-
-}
-
 
 public class JSONAPIError: JSONPrinter {
 
