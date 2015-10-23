@@ -22,16 +22,21 @@ public class JSONAPIResource: JSONPrinter {
     public var attributes: [String:AnyObject] = [:]
     public var relationships: [JSONAPIRelationship] = []
     public var loaded = JSONAPIResourceLoaded.NotLoaded
+    weak public var parent:JSONAPIDocument?
     
     public init(){}
     
-    public convenience init(_ json: NSDictionary, loaded: JSONAPIResourceLoaded = .NotLoaded) {
-        self.init(json as! [String:AnyObject], loaded: loaded)
+    public convenience init(_ json: NSDictionary, parentDocument: JSONAPIDocument?, loaded: JSONAPIResourceLoaded = .NotLoaded) {
+        self.init(json as! [String:AnyObject], parentDocument:parentDocument)
     }
     
-    public convenience init(_ json: [String:AnyObject], loadedState: JSONAPIResourceLoaded = .NotLoaded) {
+    public convenience init(_ json: [String:AnyObject], parentDocument: JSONAPIDocument?, loadedState: JSONAPIResourceLoaded = .NotLoaded) {
         self.init()
         loaded = loadedState
+        
+        if let document = parentDocument {
+            parent = document
+        }
         
         if let objectId = json["id"] {
             id = "\(objectId)"
@@ -87,4 +92,28 @@ public class JSONAPIResource: JSONPrinter {
     public subscript(key: String) -> AnyObject? {
         return attributes[key]
     }
+    
+    public func loadIncludedResources(){
+    
+        if let includes = parent?.included {
+        
+            for relationship in self.relationships {
+                
+                for resource in relationship.resources {
+                    
+                    let includedResource = includes.filter{$0.id == resource.id && $0.type == resource.type }.first
+                    
+                    if includedResource != nil {
+                    
+                        resource.attributes = includedResource!.attributes
+                        resource.relationships = includedResource!.relationships
+                        resource.loadIncludedResources()
+                        resource.loaded = .Loaded
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
