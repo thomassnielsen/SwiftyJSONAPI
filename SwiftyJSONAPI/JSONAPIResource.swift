@@ -107,7 +107,10 @@ public class JSONAPIResource: JSONPrinter {
                     
                         resource.attributes = includedResource!.attributes
                         resource.relationships = includedResource!.relationships
-                        resource.loadIncludedResources()
+                        if !resource.relationships.isEmpty {
+                            resource.parent = self.parent
+                            resource.loadIncludedResources()
+                        }
                         resource.loaded = .Loaded
                     }
                 }
