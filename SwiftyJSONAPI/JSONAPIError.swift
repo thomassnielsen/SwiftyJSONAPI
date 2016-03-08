@@ -87,7 +87,7 @@ public class JSONAPIError: JSONPrinter {
     
     //TODO: fill it with the correct attributes
     public func toNSError() -> NSError {
-        return NSError(domain: "godmother", code: 99, userInfo: nil)
+        return NSError(domain: "SwiftyJSONAPI", code: 99, userInfo: nil)
     }
 
 
