@@ -1,4 +1,4 @@
-[![Travis-CI](https://travis-ci.org/thomassnielsen/SwiftyJSONAPI.svg?branch=master)](!https://travis-ci.org/thomassnielsen/SwiftyJSONAPI.svg?branch=master!:https://travis-ci.org/thomassnielsen/SwiftyJSONAPI)
+[![Travis-CI](https://travis-ci.org/RentTheRunway/SwiftyJSONAPI.svg?branch=master)](!https://travis-ci.org/RentTheRunway/SwiftyJSONAPI.svg?branch=master!:https://travis-ci.org/RentTheRunway/SwiftyJSONAPI)
 
 # SwiftyJSONAPI
 JSONAPI document representation and serializing in Swift.

@@ -23,7 +23,7 @@ public class JSONAPIRelationship {
         }
         
         for object in normalizeJSONAPIObjectToArray(data["data"]) {
-            resources.append(JSONAPIResource(object))
+            resources.append(JSONAPIResource(object, parentDocument:nil, loadedState: .NotLoaded))
         }
     }
     

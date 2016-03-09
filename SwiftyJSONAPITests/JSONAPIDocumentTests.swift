@@ -45,6 +45,33 @@ class JSONAPIDocumentTests: XCTestCase {
         XCTAssertNotNil(resource.url, "Resources should have an URL")
         XCTAssert(resource.relationships.count == 2, "Expected number of relationships to be 2, was \(resource.relationships.count)")
     }
+    
+    func testErrors() {
+        
+        if let errorFile = NSBundle(forClass: JSONAPIDocumentTests.self).pathForResource("example-error", ofType: "json") {
+            self.testData = NSData(contentsOfFile: errorFile)
+        } else {
+            XCTFail("Could not find error test file")
+        }
+        
+        let document = try! JSONAPIDocument(self.testData)
+        let error = document.errors.first!
+        
+        XCTAssertNotNil(error.id, "Errors should have an id")
+        XCTAssertEqual(error.status,"422", "Expected error code to be 422")
+    
+    }
+    
+    func testMeta(){
+        let document = try! JSONAPIDocument(self.testData)
+        let meta = document.meta!
+        let keys = [String](meta.keys)
+    
+        XCTAssertNotNil(meta, "document should have meta information")
+        XCTAssertEqual(keys[0], "authors", "meta should contain a authors key")
+        
+    }
+    
 //
     func testPerformanceExample() {
         // This is an example of a performance test case.

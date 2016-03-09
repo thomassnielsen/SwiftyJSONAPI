@@ -13,6 +13,8 @@ public class JSONAPIDocument: JSONPrinter {
     public var links: [String:NSURL] = [:]
     public var included: [JSONAPIResource] = []
     public var url: NSURL?
+    public var meta: Dictionary<String,AnyObject>?
+    public var errors: [JSONAPIError] = []
     
     public convenience init(_ json: NSDictionary) {
         self.init(json as! [String:AnyObject])
@@ -21,11 +23,11 @@ public class JSONAPIDocument: JSONPrinter {
     public convenience init(_ json: [String:AnyObject]) {
         self.init()
         for object in normalizeJSONAPIObjectToArray(json["data"]) {
-            data.append(JSONAPIResource(object))
+            data.append(JSONAPIResource(object, parentDocument: self, loaded: .NotLoaded))
         }
         
         for object in normalizeJSONAPIObjectToArray(json["included"]) {
-            included.append(JSONAPIResource(object))
+            included.append(JSONAPIResource(object,parentDocument: self))
         }
         
         if let strings = json["links"] as? [String:String] {
@@ -36,6 +38,15 @@ public class JSONAPIDocument: JSONPrinter {
                 }
             }
         }
+        
+        for object in normalizeJSONAPIObjectToArray(json["errors"]) {
+            errors.append(JSONAPIError(object))
+        }
+        
+        if let metadata = json["meta"] as? Dictionary<String,AnyObject> {
+            meta = metadata
+        }
+        
     }
     
     public convenience init(_ data: NSData) throws {
