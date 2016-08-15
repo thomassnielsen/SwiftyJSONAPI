@@ -71,8 +71,8 @@ public class JSONAPIResource: JSONPrinter {
             "type":type
         ]
         
-        if let url = url {
-            dict["links"] = ["self":url.absoluteString]
+        if let url = url?.absoluteString {
+            dict["links"] = ["self":url]
         }
         
         if loaded == .Loaded {
