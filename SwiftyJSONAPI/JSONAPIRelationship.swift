@@ -31,8 +31,8 @@ public class JSONAPIRelationship {
         var dict: [String:AnyObject] = [:]
         dict["data"] = resources.count == 1 ? resources.first!.toDict() : resources.map { $0.toDict() }
         
-        if let url = url {
-            dict["links"] = ["self":url.absoluteString]
+        if let url = url?.absoluteString {
+            dict["links"] = ["self":url]
         }
         
         return dict
