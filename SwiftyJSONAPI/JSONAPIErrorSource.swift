@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class JSONAPIErrorSource: JSONPrinter {
+open class JSONAPIErrorSource: JSONPrinter {
     
-    public var pointer:String = ""
-    public var parameter:String = ""
+    open var pointer:String = ""
+    open var parameter:String = ""
     
     public init(){}
     
@@ -31,10 +31,10 @@ public class JSONAPIErrorSource: JSONPrinter {
         
     }
     
-    public func toDict() -> [String:AnyObject] {
-        let dict: [String:AnyObject] = [
-            "pointer":pointer,
-            "parameter":parameter
+    open func toDict() -> [String:Any] {
+        let dict: [String:Any] = [
+            "pointer":pointer as Any,
+            "parameter":parameter as Any
         ]
         return dict
     }

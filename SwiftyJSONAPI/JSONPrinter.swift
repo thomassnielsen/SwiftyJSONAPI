@@ -9,18 +9,18 @@
 import Foundation
 
 public protocol JSONPrinter {
-    func toDict() -> [String:AnyObject]
+    func toDict() -> [String:Any]
 }
 
 public extension JSONPrinter {
-    func toJSONData(prettyPrinted: Bool = false) -> NSData {
+    func toJSONData(_ prettyPrinted: Bool = false) -> Data {
         if prettyPrinted {
-            return try! NSJSONSerialization.dataWithJSONObject(toDict() as NSDictionary, options: NSJSONWritingOptions.PrettyPrinted)
+            return try! JSONSerialization.data(withJSONObject: toDict() as NSDictionary, options: JSONSerialization.WritingOptions.prettyPrinted)
         }
-        return try! NSJSONSerialization.dataWithJSONObject(toDict() as NSDictionary, options: NSJSONWritingOptions(rawValue: 0))
+        return try! JSONSerialization.data(withJSONObject: toDict() as NSDictionary, options: JSONSerialization.WritingOptions(rawValue: 0))
     }
     
-    func toJSONString(pretty pretty: Bool = false) -> String {
-        return String(data: toJSONData(pretty), encoding: NSUTF8StringEncoding)!
+    func toJSONString(pretty: Bool = false) -> String {
+        return String(data: toJSONData(pretty), encoding: String.Encoding.utf8)!
     }
 }

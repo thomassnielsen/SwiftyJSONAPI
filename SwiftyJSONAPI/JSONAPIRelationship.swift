@@ -8,17 +8,17 @@
 
 import Foundation
 
-public class JSONAPIRelationship {
-    public var url: NSURL?
-    public var type = ""
-    public var resources: [JSONAPIResource] = []
+open class JSONAPIRelationship {
+    open var url: URL?
+    open var type = ""
+    open var resources: [JSONAPIResource] = []
     
     public convenience init (type: String, data: [String:AnyObject]) {
         self.init()
         self.type = type
         if let urls = data["links"] as? [String:String] {
             if let relationURL = urls["self"] {
-                self.url = NSURL(string: relationURL)
+                self.url = URL(string: relationURL)
             }
         }
         
@@ -27,8 +27,8 @@ public class JSONAPIRelationship {
         }
     }
     
-    public func toDict() -> [String:AnyObject] {
-        var dict: [String:AnyObject] = [:]
+    open func toDict() -> [String:Any] {
+        var dict: [String:Any] = [:]
         dict["data"] = resources.count == 1 ? resources.first!.toDict() : resources.map { $0.toDict() }
         
         if let url = url?.absoluteString {

@@ -51,7 +51,6 @@ public class JSONAPIResource: JSONPrinter {
         }
         
         if let rels = json["relationships"] as? [String:AnyObject] {
-            rels
             for (key, data) in rels {
                 relationships.append(JSONAPIRelationship(type: key, data: data as! [String : AnyObject]))
             }
@@ -65,10 +64,10 @@ public class JSONAPIResource: JSONPrinter {
         }
     }
     
-    public func toDict() -> [String:AnyObject] {
-        var dict: [String:AnyObject] = [
-            "id":id,
-            "type":type
+    public func toDict() -> [String:Any] {
+        var dict: [String:Any] = [
+            "id":id as Any,
+            "type":type as Any
         ]
         
         if let url = url?.absoluteString {
@@ -76,13 +75,13 @@ public class JSONAPIResource: JSONPrinter {
         }
         
         if loaded == .Loaded {
-            dict["attributes"] = attributes
+            dict["attributes"] = attributes as AnyObject?
             var rels: [String:AnyObject] = [:]
             for rel in relationships {
-                rels[rel.type] = rel.toDict()
+                rels[rel.type] = rel.toDict() as AnyObject?
             }
             if rels.count > 0 {
-                dict["relationships"] = rels
+                dict["relationships"] = rels as AnyObject?
             }
         }
         

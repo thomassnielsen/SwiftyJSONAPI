@@ -9,16 +9,16 @@
 import Foundation
 
 
-public class JSONAPIError: JSONPrinter {
+open class JSONAPIError: JSONPrinter {
 
-    public var id = ""
-    public var links: [String:NSURL] = [:]
-    public var status = ""
-    public var code = ""
-    public var title = ""
-    public var detail = ""
-    public var source: JSONAPIErrorSource?
-    public var meta: Dictionary<String,AnyObject>?
+    open var id = ""
+    open var links: [String:URL] = [:]
+    open var status = ""
+    open var code = ""
+    open var title = ""
+    open var detail = ""
+    open var source: JSONAPIErrorSource?
+    open var meta: Dictionary<String,AnyObject>?
     
     public init(){}
     
@@ -34,7 +34,7 @@ public class JSONAPIError: JSONPrinter {
         
         if let strings = json["links"] as? [String:String] {
             for (key, value) in strings {
-                links[key] = NSURL(string: value)!
+                links[key] = URL(string: value)!
             }
         }
         
@@ -64,14 +64,14 @@ public class JSONAPIError: JSONPrinter {
 
     }
     
-    public func toDict() -> [String:AnyObject] {        
-        var dict: [String:AnyObject] = [
-            "id":id,
-            "links":links,
-            "status":status,
-            "code":code,
-            "title":title,
-            "detail":detail,
+    open func toDict() -> [String:Any] {
+        var dict: [String:Any] = [
+            "id":id as Any,
+            "links":links as Any,
+            "status":status as Any,
+            "code":code as Any,
+            "title":title as Any,
+            "detail":detail as Any,
         ]
         
         if source != nil {
@@ -79,14 +79,14 @@ public class JSONAPIError: JSONPrinter {
         }
         
         if meta != nil {
-            dict["meta"] = meta!
+            dict["meta"] = meta! as Any?
         }
         
         return dict
     }
     
     //TODO: fill it with the correct attributes
-    public func toNSError() -> NSError {
+    open func toNSError() -> NSError {
         return NSError(domain: "SwiftyJSONAPI", code: 99, userInfo: nil)
     }
 
