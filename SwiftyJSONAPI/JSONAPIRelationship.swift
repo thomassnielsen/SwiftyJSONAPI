@@ -13,7 +13,7 @@ open class JSONAPIRelationship {
     open var type = ""
     open var resources: [JSONAPIResource] = []
     
-    public convenience init (type: String, data: [String:AnyObject]) {
+    public convenience init (type: String, data: [String:Any]) {
         self.init()
         self.type = type
         if let urls = data["links"] as? [String:String] {

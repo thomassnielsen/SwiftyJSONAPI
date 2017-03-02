@@ -14,14 +14,14 @@ open class JSONAPIDocument: JSONPrinter {
     open var links: [String:URL] = [:]
     open var included: [JSONAPIResource] = []
     open var url: URL?
-    open var meta: Dictionary<String,AnyObject>?
+    open var meta: Dictionary<String,Any>?
     open var errors: [JSONAPIError] = []
     
     public convenience init(_ json: NSDictionary) {
-        self.init(json as! [String:AnyObject])
+        self.init(json as! [String:Any])
     }
     
-    public convenience init(_ json: [String:AnyObject]) {
+    public convenience init(_ json: [String:Any]) {
         self.init()
         for object in normalizeJSONAPIObjectToArray(json["data"]) {
             data.append(JSONAPIResource(object as NSDictionary, parentDocument: self, loaded: .NotLoaded))
@@ -44,7 +44,7 @@ open class JSONAPIDocument: JSONPrinter {
             errors.append(JSONAPIError(object))
         }
         
-        if let metadata = json["meta"] as? Dictionary<String,AnyObject> {
+        if let metadata = json["meta"] as? Dictionary<String,Any> {
             meta = metadata
         }
         
@@ -52,7 +52,7 @@ open class JSONAPIDocument: JSONPrinter {
     
     public convenience init(_ data: Data) throws {
         let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
-        self.init(json as! [String:AnyObject])
+        self.init(json as! [String:Any])
     }
     
     open func toDict() -> [String:Any] {
@@ -61,7 +61,7 @@ open class JSONAPIDocument: JSONPrinter {
         
         switch included.count {
         case 1:
-            dict["included"] = included.first!.toDict() as AnyObject?
+            dict["included"] = included.first!.toDict() as Any?
         case let x where x > 1:
             dict["included"] = included.map { $0.toDict() }
         default: break

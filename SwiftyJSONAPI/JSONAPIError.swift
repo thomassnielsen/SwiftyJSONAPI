@@ -18,15 +18,15 @@ open class JSONAPIError: JSONPrinter {
     open var title = ""
     open var detail = ""
     open var source: JSONAPIErrorSource?
-    open var meta: Dictionary<String,AnyObject>?
+    open var meta: Dictionary<String,Any>?
     
     public init(){}
     
     public convenience init(_ json: NSDictionary) {
-        self.init(json as! [String:AnyObject])
+        self.init(json as! [String:Any])
     }
     
-    public convenience init(_ json: [String:AnyObject]) {
+    public convenience init(_ json: [String:Any]) {
         self.init()
         if let objectId = json["id"] {
             id = "\(objectId)"
@@ -54,11 +54,11 @@ open class JSONAPIError: JSONPrinter {
             detail = "\(objectDetail)"
         }
         
-        if let objectSource = json["source"] as? [String:AnyObject] {
+        if let objectSource = json["source"] as? [String:Any] {
             source = JSONAPIErrorSource(objectSource)
         }
         
-        if let objectMeta = json["meta"] as? [String:AnyObject] {
+        if let objectMeta = json["meta"] as? [String:Any] {
             meta = objectMeta
         }
 
