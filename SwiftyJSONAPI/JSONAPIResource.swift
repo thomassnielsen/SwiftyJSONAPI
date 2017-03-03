@@ -19,7 +19,7 @@ public class JSONAPIResource: JSONPrinter {
     public var id = ""
     public var type = ""
     public var url: NSURL?
-    public var attributes: [String:AnyObject] = [:]
+    public var attributes: [String:Any] = [:]
     public var relationships: [JSONAPIRelationship] = []
     public var loaded = JSONAPIResourceLoaded.NotLoaded
     weak public var parent:JSONAPIDocument?
@@ -27,10 +27,10 @@ public class JSONAPIResource: JSONPrinter {
     public init(){}
     
     public convenience init(_ json: NSDictionary, parentDocument: JSONAPIDocument?, loaded: JSONAPIResourceLoaded = .NotLoaded) {
-        self.init(json as! [String:AnyObject], parentDocument:parentDocument)
+        self.init(json as! [String:Any], parentDocument:parentDocument)
     }
     
-    public convenience init(_ json: [String:AnyObject], parentDocument: JSONAPIDocument?, loadedState: JSONAPIResourceLoaded = .NotLoaded) {
+    public convenience init(_ json: [String:Any], parentDocument: JSONAPIDocument?, loadedState: JSONAPIResourceLoaded = .NotLoaded) {
         self.init()
         loaded = loadedState
         
@@ -45,30 +45,29 @@ public class JSONAPIResource: JSONPrinter {
             type = "\(objectType)"
         }
         
-        if let attrs = json["attributes"] as? [String:AnyObject] {
+        if let attrs = json["attributes"] as? [String:Any] {
             attributes = attrs
             loaded = .Loaded
         }
         
-        if let rels = json["relationships"] as? [String:AnyObject] {
-            rels
+        if let rels = json["relationships"] as? [String:Any] {
             for (key, data) in rels {
-                relationships.append(JSONAPIRelationship(type: key, data: data as! [String : AnyObject]))
+                relationships.append(JSONAPIRelationship(type: key, data: data as! [String : Any]))
             }
             loaded = .Loaded
         }
         
-        if let links = json["links"] {
+        if let links = json["links"] as? [String:Any] {
             if let objectUrl = links["self"] as? String {
                 url = NSURL(string: objectUrl)!
             }
         }
     }
     
-    public func toDict() -> [String:AnyObject] {
-        var dict: [String:AnyObject] = [
-            "id":id,
-            "type":type
+    public func toDict() -> [String:Any] {
+        var dict: [String:Any] = [
+            "id":id as Any,
+            "type":type as Any
         ]
         
         if let url = url?.absoluteString {
@@ -76,20 +75,20 @@ public class JSONAPIResource: JSONPrinter {
         }
         
         if loaded == .Loaded {
-            dict["attributes"] = attributes
-            var rels: [String:AnyObject] = [:]
+            dict["attributes"] = attributes as Any?
+            var rels: [String:Any] = [:]
             for rel in relationships {
-                rels[rel.type] = rel.toDict()
+                rels[rel.type] = rel.toDict() as Any?
             }
             if rels.count > 0 {
-                dict["relationships"] = rels
+                dict["relationships"] = rels as Any?
             }
         }
         
         return dict
     }
     
-    public subscript(key: String) -> AnyObject? {
+    public subscript(key: String) -> Any? {
         return attributes[key]
     }
     

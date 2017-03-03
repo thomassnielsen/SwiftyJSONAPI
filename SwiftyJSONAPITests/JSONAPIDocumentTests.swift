@@ -11,13 +11,13 @@ import XCTest
 
 class JSONAPIDocumentTests: XCTestCase {
 
-    var testData: NSData!
+    var testData: Data!
     
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        if let file = NSBundle(forClass: JSONAPIDocumentTests.self).pathForResource("example-document-1", ofType: "json") {
-            self.testData = NSData(contentsOfFile: file)
+        if let file = Bundle(for: JSONAPIDocumentTests.self).path(forResource: "example-document-1", ofType: "json") {
+            self.testData = try? Data(contentsOf: URL(fileURLWithPath: file))
         } else {
             XCTFail("Could not find test file")
         }
@@ -48,8 +48,8 @@ class JSONAPIDocumentTests: XCTestCase {
     
     func testErrors() {
         
-        if let errorFile = NSBundle(forClass: JSONAPIDocumentTests.self).pathForResource("example-error", ofType: "json") {
-            self.testData = NSData(contentsOfFile: errorFile)
+        if let errorFile = Bundle(for: JSONAPIDocumentTests.self).path(forResource: "example-error", ofType: "json") {
+            self.testData = try? Data(contentsOf: URL(fileURLWithPath: errorFile))
         } else {
             XCTFail("Could not find error test file")
         }
@@ -67,15 +67,15 @@ class JSONAPIDocumentTests: XCTestCase {
         let meta = document.meta!
         let keys = [String](meta.keys)
     
-        XCTAssertNotNil(meta, "document should have meta information")
-        XCTAssertEqual(keys[0], "authors", "meta should contain a authors key")
+        XCTAssertNotNil(meta, "document should have meta information")        
+        XCTAssertTrue(keys.contains("authors"),"meta should contain a authors key")
         
     }
     
 //
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock {
+        self.measure {
             _ = try! JSONAPIDocument(self.testData)
         }
     }

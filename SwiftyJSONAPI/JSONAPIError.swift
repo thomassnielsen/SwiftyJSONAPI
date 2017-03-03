@@ -9,24 +9,24 @@
 import Foundation
 
 
-public class JSONAPIError: JSONPrinter {
+open class JSONAPIError: JSONPrinter {
 
-    public var id = ""
-    public var links: [String:NSURL] = [:]
-    public var status = ""
-    public var code = ""
-    public var title = ""
-    public var detail = ""
-    public var source: JSONAPIErrorSource?
-    public var meta: Dictionary<String,AnyObject>?
+    open var id = ""
+    open var links: [String:URL] = [:]
+    open var status = ""
+    open var code = ""
+    open var title = ""
+    open var detail = ""
+    open var source: JSONAPIErrorSource?
+    open var meta: Dictionary<String,Any>?
     
     public init(){}
     
     public convenience init(_ json: NSDictionary) {
-        self.init(json as! [String:AnyObject])
+        self.init(json as! [String:Any])
     }
     
-    public convenience init(_ json: [String:AnyObject]) {
+    public convenience init(_ json: [String:Any]) {
         self.init()
         if let objectId = json["id"] {
             id = "\(objectId)"
@@ -34,7 +34,7 @@ public class JSONAPIError: JSONPrinter {
         
         if let strings = json["links"] as? [String:String] {
             for (key, value) in strings {
-                links[key] = NSURL(string: value)!
+                links[key] = URL(string: value)!
             }
         }
         
@@ -54,24 +54,24 @@ public class JSONAPIError: JSONPrinter {
             detail = "\(objectDetail)"
         }
         
-        if let objectSource = json["source"] as? [String:AnyObject] {
+        if let objectSource = json["source"] as? [String:Any] {
             source = JSONAPIErrorSource(objectSource)
         }
         
-        if let objectMeta = json["meta"] as? [String:AnyObject] {
+        if let objectMeta = json["meta"] as? [String:Any] {
             meta = objectMeta
         }
 
     }
     
-    public func toDict() -> [String:AnyObject] {        
-        var dict: [String:AnyObject] = [
-            "id":id,
-            "links":links,
-            "status":status,
-            "code":code,
-            "title":title,
-            "detail":detail,
+    open func toDict() -> [String:Any] {
+        var dict: [String:Any] = [
+            "id":id as Any,
+            "links":links as Any,
+            "status":status as Any,
+            "code":code as Any,
+            "title":title as Any,
+            "detail":detail as Any,
         ]
         
         if source != nil {
@@ -79,14 +79,14 @@ public class JSONAPIError: JSONPrinter {
         }
         
         if meta != nil {
-            dict["meta"] = meta!
+            dict["meta"] = meta! as Any?
         }
         
         return dict
     }
     
     //TODO: fill it with the correct attributes
-    public func toNSError() -> NSError {
+    open func toNSError() -> NSError {
         return NSError(domain: "SwiftyJSONAPI", code: 99, userInfo: nil)
     }
 
