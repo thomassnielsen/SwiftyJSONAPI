@@ -8,22 +8,23 @@
 
 import Foundation
 
-public class JSONAPIDocument: JSONPrinter {
-    public var data: [JSONAPIResource] = []
-    public var links: [String:NSURL] = [:]
-    public var included: [JSONAPIResource] = []
-    public var url: NSURL?
-    public var meta: Dictionary<String,AnyObject>?
-    public var errors: [JSONAPIError] = []
+open class JSONAPIDocument: JSONPrinter {
+
+    open var data: [JSONAPIResource] = []
+    open var links: [String:URL] = [:]
+    open var included: [JSONAPIResource] = []
+    open var url: URL?
+    open var meta: Dictionary<String,Any>?
+    open var errors: [JSONAPIError] = []
     
     public convenience init(_ json: NSDictionary) {
-        self.init(json as! [String:AnyObject])
+        self.init(json as! [String:Any])
     }
     
-    public convenience init(_ json: [String:AnyObject]) {
+    public convenience init(_ json: [String:Any]) {
         self.init()
         for object in normalizeJSONAPIObjectToArray(json["data"]) {
-            data.append(JSONAPIResource(object, parentDocument: self, loaded: .NotLoaded))
+            data.append(JSONAPIResource(object as NSDictionary, parentDocument: self, loaded: .NotLoaded))
         }
         
         for object in normalizeJSONAPIObjectToArray(json["included"]) {
@@ -32,9 +33,9 @@ public class JSONAPIDocument: JSONPrinter {
         
         if let strings = json["links"] as? [String:String] {
             for (key, value) in strings {
-                links[key] = NSURL(string: value)!
+                links[key] = URL(string: value)!
                 if key == "self" {
-                    url = NSURL(string: value)!
+                    url = URL(string: value)!
                 }
             }
         }
@@ -43,24 +44,24 @@ public class JSONAPIDocument: JSONPrinter {
             errors.append(JSONAPIError(object))
         }
         
-        if let metadata = json["meta"] as? Dictionary<String,AnyObject> {
+        if let metadata = json["meta"] as? Dictionary<String,Any> {
             meta = metadata
         }
         
     }
     
-    public convenience init(_ data: NSData) throws {
-        let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
-        self.init(json as! [String:AnyObject])
+    public convenience init(_ data: Data) throws {
+        let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
+        self.init(json as! [String:Any])
     }
     
-    public func toDict() -> [String:AnyObject] {
-        var dict: [String:AnyObject] = [:]
+    open func toDict() -> [String:Any] {
+        var dict: [String:Any] = [:]
         dict["data"] = data.count == 1 ? data.first!.toDict() : data.map { $0.toDict() }
         
         switch included.count {
         case 1:
-            dict["included"] = included.first!.toDict()
+            dict["included"] = included.first!.toDict() as Any?
         case let x where x > 1:
             dict["included"] = included.map { $0.toDict() }
         default: break

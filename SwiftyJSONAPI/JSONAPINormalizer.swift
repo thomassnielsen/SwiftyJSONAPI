@@ -8,12 +8,12 @@
 
 import Foundation
 
-func normalizeJSONAPIObjectToArray(object: AnyObject?) -> [[String:AnyObject]] {
+func normalizeJSONAPIObjectToArray(_ object: Any?) -> [[String:Any]] {
     if object is NSArray {
-        return object as? [[String:AnyObject]] ?? []
+        return object as? [[String:Any]] ?? []
     } else if let object = object as? NSDictionary {
         let array = [object]
-        return array as? [[String:AnyObject]] ?? []
+        return array as? [[String:Any]] ?? []
     }
     return []
 }
