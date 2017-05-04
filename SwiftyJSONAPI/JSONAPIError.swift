@@ -9,7 +9,7 @@
 import Foundation
 
 
-open class JSONAPIError: JSONPrinter {
+open class JSONAPIError: JSONPrinter, Error {
 
     open var id = ""
     open var links: [String:URL] = [:]
@@ -83,11 +83,6 @@ open class JSONAPIError: JSONPrinter {
         }
         
         return dict
-    }
-    
-    //TODO: fill it with the correct attributes
-    open func toNSError() -> NSError {
-        return NSError(domain: "SwiftyJSONAPI", code: 99, userInfo: nil)
     }
 
 
