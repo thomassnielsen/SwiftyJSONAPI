@@ -74,12 +74,12 @@ open class JSONAPIError: JSONPrinter, Error {
             "detail":detail as Any,
         ]
         
-        if source != nil {
-            dict["source"] = source!
+        if let source = source {
+            dict["source"] = source
         }
         
-        if meta != nil {
-            dict["meta"] = meta! as Any?
+        if let meta = meta {
+            dict["meta"] = meta as Any?
         }
         
         return dict

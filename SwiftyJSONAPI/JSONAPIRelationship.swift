@@ -16,12 +16,11 @@ open class JSONAPIRelationship {
     public convenience init (type: String, data: [String:Any]) {
         self.init()
         self.type = type
-        if let urls = data["links"] as? [String:String] {
-            if let relationURL = urls["self"] {
-                self.url = URL(string: relationURL)
-            }
+        if let urls = data["links"] as? [String:String],
+            let relationURL = urls["self"] {
+            self.url = URL(string: relationURL)
         }
-        
+
         for object in normalizeJSONAPIObjectToArray(data["data"]) {
             resources.append(JSONAPIResource(object, parentDocument:nil, loadedState: .NotLoaded))
         }
