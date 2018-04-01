@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SwiftyJSONAPI"
-  s.version      = "0.0.16"
+  s.version      = "0.0.17"
   s.summary      = "JSONAPI document representation and serializing in Swift."
 
   s.homepage     = "https://github.com/thomassnielsen/SwiftyJSONAPI"
