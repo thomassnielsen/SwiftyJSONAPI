@@ -1,7 +1,7 @@
 language: objective-c
 # xcode_project: SwiftyJSONAPI.xcodeproj
 # xcode_scheme: SwiftyJSONAPI
-osx_image: xcode8.2
+osx_image: xcode9.3beta
 script:
     - xcodebuild clean build test -project SwiftyJSONAPI.xcodeproj -scheme SwiftyJSONAPI -destination 'platform=iOS Simulator,id=86B2CA7C-0247-4257-BFEA-8035084AF2CF' #iPhone 7
 
