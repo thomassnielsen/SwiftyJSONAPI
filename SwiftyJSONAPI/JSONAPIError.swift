@@ -9,7 +9,7 @@
 import Foundation
 
 
-open class JSONAPIError: JSONPrinter {
+open class JSONAPIError: JSONPrinter, Error {
 
     open var id = ""
     open var links: [String:URL] = [:]
@@ -74,20 +74,15 @@ open class JSONAPIError: JSONPrinter {
             "detail":detail as Any,
         ]
         
-        if source != nil {
-            dict["source"] = source!
+        if let source = source {
+            dict["source"] = source
         }
         
-        if meta != nil {
-            dict["meta"] = meta! as Any?
+        if let meta = meta {
+            dict["meta"] = meta as Any?
         }
         
         return dict
-    }
-    
-    //TODO: fill it with the correct attributes
-    open func toNSError() -> NSError {
-        return NSError(domain: "SwiftyJSONAPI", code: 99, userInfo: nil)
     }
 
 

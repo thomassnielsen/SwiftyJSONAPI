@@ -72,6 +72,33 @@ class JSONAPIDocumentTests: XCTestCase {
         
     }
     
+    func testResourcesLoadedFromInclude () {
+        let document = try! JSONAPIDocument(self.testData)
+        var authorAttributesCount   = 0
+        var commentsAttributesCount = 0
+        
+        document.loadIncludedResources()
+        
+        guard let postResource = document.data.first else {
+            XCTFail("Could not find resource of type Post"); return
+        }
+        
+        postResource.relationships.forEach { relationship in
+            switch relationship.type {
+            case "author":
+                authorAttributesCount = relationship.resources.first?.attributes.count ?? 0
+            case "comments":
+                commentsAttributesCount = relationship.resources.first?.attributes.count ?? 0
+            default:
+                // For now we are only handling these 2 cases
+                break
+            }
+        }
+        
+        XCTAssertTrue(authorAttributesCount == 3,"Author resource should contain 3 attributes")
+        XCTAssertTrue(commentsAttributesCount == 1,"Comment resource should contain 1 attribute")
+    }
+    
 //
     func testPerformanceExample() {
         // This is an example of a performance test case.

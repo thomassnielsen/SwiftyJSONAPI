@@ -92,30 +92,23 @@ public class JSONAPIResource: JSONPrinter {
         return attributes[key]
     }
     
-    public func loadIncludedResources(){
-    
-        if let includes = parent?.included {
+    func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId) {
         
-            for relationship in self.relationships {
+        for relationship in self.relationships {
+            
+            for resource in relationship.resources {
                 
-                for resource in relationship.resources {
-                    
-                    let includedResource = includes.filter{$0.id == resource.id && $0.type == resource.type }.first
-                    
-                    if includedResource != nil {
-                    
-                        resource.attributes = includedResource!.attributes
-                        resource.relationships = includedResource!.relationships
-                        if !resource.relationships.isEmpty {
-                            resource.parent = self.parent
-                            resource.loadIncludedResources()
-                        }
-                        resource.loaded = .Loaded
-                    }
+                guard let includedResource = includedResources[resource] else { continue }
+                
+                resource.attributes    = includedResource.attributes
+                resource.relationships = includedResource.relationships
+                
+                if !resource.relationships.isEmpty {
+                    resource.parent = self.parent
+                    resource.loadResources(withIncludedResources: includedResources)
                 }
+                resource.loaded = .Loaded
             }
         }
     }
-    
-    
 }

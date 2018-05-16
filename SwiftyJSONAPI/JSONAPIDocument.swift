@@ -8,6 +8,11 @@
 
 import Foundation
 
+
+typealias ResourcesByTypeAndId = [String : ResourcesById]
+typealias ResourcesById        = [String : JSONAPIResource]
+
+
 open class JSONAPIDocument: JSONPrinter {
 
     open var data: [JSONAPIResource] = []
@@ -68,5 +73,29 @@ open class JSONAPIDocument: JSONPrinter {
         }
         
         return dict
+    }
+    
+    public func loadIncludedResources() {
+        let includedResources = included.reduce(into: ResourcesByTypeAndId()) { (result, resource) in
+            result[resource] = resource
+        }
+        
+        data.forEach { $0.loadResources(withIncludedResources: includedResources) }
+    }
+}
+
+
+extension Dictionary where Key == String, Value == ResourcesById {
+    
+    subscript(key: JSONAPIResource) -> JSONAPIResource? {
+        get { return self[key.type]?[key.id] }
+        set {
+            if var resources = self[key.type] {
+                resources[key.id] = newValue
+                self[key.type] = resources
+            } else if let resource = newValue {
+                self[key.type] = [resource.id : resource]
+            }
+        }
     }
 }
