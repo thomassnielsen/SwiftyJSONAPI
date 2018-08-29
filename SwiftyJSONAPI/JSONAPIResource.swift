@@ -14,6 +14,7 @@ public enum JSONAPIResourceLoaded {
     case NotLoaded
 }
 
+typealias CachedResourceIds = Set<String>
 
 public class JSONAPIResource: JSONPrinter {
     public var id = ""
@@ -92,7 +93,7 @@ public class JSONAPIResource: JSONPrinter {
         return attributes[key]
     }
     
-    func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId) {
+    func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId, cachedResourceIds: inout CachedResourceIds) {
         
         for relationship in self.relationships {
             
@@ -103,10 +104,14 @@ public class JSONAPIResource: JSONPrinter {
                 resource.attributes    = includedResource.attributes
                 resource.relationships = includedResource.relationships
                 
-                if !resource.relationships.isEmpty {
+                if !resource.relationships.isEmpty, !cachedResourceIds.contains(resource.id) {
+                    
+                    cachedResourceIds.insert(resource.id)
+                    
                     resource.parent = self.parent
-                    resource.loadResources(withIncludedResources: includedResources)
+                    resource.loadResources(withIncludedResources: includedResources, cachedResourceIds: &cachedResourceIds)
                 }
+                
                 resource.loaded = .Loaded
             }
         }
