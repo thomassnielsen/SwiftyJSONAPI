@@ -81,8 +81,8 @@ open class JSONAPIDocument: JSONPrinter {
         }
         
         data.forEach {
-            var cachedResourceIds = CachedResourceIds()
-            $0.loadResources(withIncludedResources: includedResources, cachedResourceIds: &cachedResourceIds)
+            var cachedResources = CachedResources()
+            $0.loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
         }
     }
 }

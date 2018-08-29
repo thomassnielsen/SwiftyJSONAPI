@@ -15,8 +15,8 @@ public enum JSONAPIResourceLoaded {
 }
 
 typealias ResourceType = String
-typealias ResourceId = String
-typealias CachedResourceIds = [ResourceType : ResourceId]
+typealias ResourceIds = Set<String>
+typealias CachedResources = [ResourceType : ResourceIds]
 
 public class JSONAPIResource: JSONPrinter {
     public var id = ""
@@ -95,7 +95,7 @@ public class JSONAPIResource: JSONPrinter {
         return attributes[key]
     }
     
-    func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId, cachedResourceIds: inout CachedResourceIds) {
+    func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId, cachedResources: inout CachedResources) {
         
         for relationship in self.relationships {
             
@@ -107,16 +107,38 @@ public class JSONAPIResource: JSONPrinter {
                 resource.relationships = includedResource.relationships
             
                 
-                if !resource.relationships.isEmpty, cachedResourceIds[resource.type] != resource.id {
-                    
-                    cachedResourceIds[resource.type] = resource.id
+                if !resource.relationships.isEmpty, shouldLoadResource(withCachedResources: &cachedResources) {
                     
                     resource.parent = self.parent
-                    resource.loadResources(withIncludedResources: includedResources, cachedResourceIds: &cachedResourceIds)
+                    resource.loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
                 }
                 
                 resource.loaded = .Loaded
             }
+        }
+    }
+}
+
+private extension JSONAPIResource {
+    
+    // Checks if a resource has been loaded already, prevents bidirectional relationships from being recursively called
+    func shouldLoadResource(withCachedResources cachedResources: inout CachedResources) -> Bool {
+        
+        if var cachedResourceIds = cachedResources[type] {
+            
+            if cachedResourceIds.contains(id) {
+                
+                return false
+            } else {
+                
+                cachedResourceIds.insert(id)
+                cachedResources[type] = cachedResourceIds
+                return true
+            }
+        } else {
+            
+            cachedResources[type] = Set([id])
+            return true
         }
     }
 }
