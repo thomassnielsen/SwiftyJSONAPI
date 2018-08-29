@@ -14,7 +14,9 @@ public enum JSONAPIResourceLoaded {
     case NotLoaded
 }
 
-typealias CachedResourceIds = Set<String>
+typealias ResourceType = String
+typealias ResourceId = String
+typealias CachedResourceIds = [ResourceType : ResourceId]
 
 public class JSONAPIResource: JSONPrinter {
     public var id = ""
@@ -103,10 +105,11 @@ public class JSONAPIResource: JSONPrinter {
                 
                 resource.attributes    = includedResource.attributes
                 resource.relationships = includedResource.relationships
+            
                 
-                if !resource.relationships.isEmpty, !cachedResourceIds.contains(resource.id) {
+                if !resource.relationships.isEmpty, cachedResourceIds[resource.type] != resource.id {
                     
-                    cachedResourceIds.insert(resource.id)
+                    cachedResourceIds[resource.type] = resource.id
                     
                     resource.parent = self.parent
                     resource.loadResources(withIncludedResources: includedResources, cachedResourceIds: &cachedResourceIds)
