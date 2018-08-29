@@ -107,7 +107,7 @@ public class JSONAPIResource: JSONPrinter {
                 resource.relationships = includedResource.relationships
             
                 
-                if !resource.relationships.isEmpty, shouldLoadResource(withCachedResources: &cachedResources) {
+                if !resource.relationships.isEmpty, resource.shouldLoadResource(withCachedResources: &cachedResources) {
                     
                     resource.parent = self.parent
                     resource.loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
