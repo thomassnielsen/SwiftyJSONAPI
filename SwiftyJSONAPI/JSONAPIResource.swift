@@ -107,7 +107,7 @@ public class JSONAPIResource: JSONPrinter {
                 resource.relationships = includedResource.relationships
             
                 
-                if !resource.relationships.isEmpty, resource.shouldLoadResource(withCachedResources: &cachedResources) {
+                if !resource.relationships.isEmpty, resource.cacheIfNeeded(&cachedResources) {
                     
                     resource.parent = self.parent
                     resource.loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
@@ -122,22 +122,22 @@ public class JSONAPIResource: JSONPrinter {
 private extension JSONAPIResource {
     
     // Checks if a resource has been loaded already, prevents bidirectional relationships from being recursively called
-    func shouldLoadResource(withCachedResources cachedResources: inout CachedResources) -> Bool {
+    @discardableResult func cacheIfNeeded(_ cache: inout CachedResources) -> Bool {
         
-        if var cachedResourceIds = cachedResources[type] {
+        if var cachedIds = cache[type] {
             
-            if cachedResourceIds.contains(id) {
+            if cachedIds.contains(id) {
                 
                 return false
             } else {
                 
-                cachedResourceIds.insert(id)
-                cachedResources[type] = cachedResourceIds
+                cachedIds.insert(id)
+                cache[type] = cachedIds
                 return true
             }
         } else {
             
-            cachedResources[type] = [id]
+            cache[type] = [id]
             return true
         }
     }
