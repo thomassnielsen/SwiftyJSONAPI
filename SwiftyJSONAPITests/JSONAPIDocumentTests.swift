@@ -142,6 +142,6 @@ class JSONAPIDocumentTests: XCTestCase {
 
 private extension JSONAPIRelationship {
     func hasRelationship(toType type: String) -> Bool {
-        return resources.first?.relationships.contains(where: { $0.type == type }) ?? false
+        return resources.first?.relationships.contains(where: { $0.type == type }) == true
     }
 }

@@ -137,7 +137,7 @@ private extension JSONAPIResource {
             }
         } else {
             
-            cachedResources[type] = Set([id])
+            cachedResources[type] = [id]
             return true
         }
     }
