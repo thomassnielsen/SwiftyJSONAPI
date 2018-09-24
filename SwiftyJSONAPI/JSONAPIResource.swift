@@ -95,27 +95,32 @@ public class JSONAPIResource: JSONPrinter {
         return attributes[key]
     }
     
-    func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId, cachedResources: inout CachedResources) {
+    func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId) {
         
-        for relationship in self.relationships {
-            
-            for resource in relationship.resources {
+        func _loadResources(withIncludedResources includedResources: ResourcesByTypeAndId, cachedResources: inout CachedResources) {
+            for relationship in self.relationships {
                 
-                guard let includedResource = includedResources[resource] else { continue }
-                
-                resource.attributes    = includedResource.attributes
-                resource.relationships = includedResource.relationships
-            
-                
-                if !resource.relationships.isEmpty, resource.cacheIfNeeded(&cachedResources) {
+                for resource in relationship.resources {
                     
-                    resource.parent = self.parent
-                    resource.loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
+                    guard let includedResource = includedResources[resource] else { continue }
+                    
+                    resource.attributes    = includedResource.attributes
+                    resource.relationships = includedResource.relationships
+                    
+                    
+                    if !resource.relationships.isEmpty, resource.cacheIfNeeded(&cachedResources) {
+                        
+                        resource.parent = self.parent
+                        _loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
+                    }
+                    
+                    resource.loaded = .Loaded
                 }
-                
-                resource.loaded = .Loaded
             }
         }
+        
+        var cachedResources = CachedResources()
+        _loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
     }
 }
 
