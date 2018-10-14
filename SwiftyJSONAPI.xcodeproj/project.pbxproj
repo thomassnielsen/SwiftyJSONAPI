@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C04AAC521370E2000547976 /* example-bidirectional-relationship.json in Resources */ = {isa = PBXBuildFile; fileRef = 1C04AAC421370E2000547976 /* example-bidirectional-relationship.json */; };
 		217C53B61BD042E300E82E37 /* JSONAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217C53B51BD042E300E82E37 /* JSONAPIError.swift */; };
 		21B93C981C8E593F00F67D9C /* JSONAPIErrorSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B93C971C8E593F00F67D9C /* JSONAPIErrorSource.swift */; };
 		21E3BD5E1BD53DAE000E4E39 /* example-error.json in Resources */ = {isa = PBXBuildFile; fileRef = 21E3BD5D1BD53DAE000E4E39 /* example-error.json */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C04AAC421370E2000547976 /* example-bidirectional-relationship.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "example-bidirectional-relationship.json"; sourceTree = "<group>"; };
 		217C53B51BD042E300E82E37 /* JSONAPIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = JSONAPIError.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		21B93C971C8E593F00F67D9C /* JSONAPIErrorSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = JSONAPIErrorSource.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		21E3BD5D1BD53DAE000E4E39 /* example-error.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "example-error.json"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				E9D236E31BA2D40A00286911 /* Info.plist */,
 				E9D236F61BA2D7B900286911 /* example-document-1.json */,
 				21E3BD5D1BD53DAE000E4E39 /* example-error.json */,
+				1C04AAC421370E2000547976 /* example-bidirectional-relationship.json */,
 			);
 			path = SwiftyJSONAPITests;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C04AAC521370E2000547976 /* example-bidirectional-relationship.json in Resources */,
 				E9D236F71BA2D7B900286911 /* example-document-1.json in Resources */,
 				21E3BD5E1BD53DAE000E4E39 /* example-error.json in Resources */,
 			);

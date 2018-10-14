@@ -62,7 +62,7 @@ class JSONAPIDocumentTests: XCTestCase {
     
     }
     
-    func testMeta(){
+    func testMeta() {
         let document = try! JSONAPIDocument(self.testData)
         let meta = document.meta!
         let keys = [String](meta.keys)
@@ -72,7 +72,7 @@ class JSONAPIDocumentTests: XCTestCase {
         
     }
     
-    func testResourcesLoadedFromInclude () {
+    func testResourcesLoadedFromInclude() {
         let document = try! JSONAPIDocument(self.testData)
         var authorAttributesCount   = 0
         var commentsAttributesCount = 0
@@ -99,6 +99,37 @@ class JSONAPIDocumentTests: XCTestCase {
         XCTAssertTrue(commentsAttributesCount == 1,"Comment resource should contain 1 attribute")
     }
     
+    func testbidirectionalRelationship() {
+        if let bidirectionalFile = Bundle(for: JSONAPIDocumentTests.self).path(forResource: "example-bidirectional-relationship", ofType: "json") {
+            self.testData = try? Data(contentsOf: URL(fileURLWithPath: bidirectionalFile))
+        } else {
+            XCTFail("Could not find error test file")
+        }
+        
+        var userHasAdressRelationship = false
+        var addressHasUserRelationship = false
+        
+        let document = try! JSONAPIDocument(self.testData)
+        document.loadIncludedResources()
+        
+        let resource = document.data.first
+        
+        resource?.relationships.forEach { relationship in
+            switch relationship.type {
+            case "user":
+               userHasAdressRelationship = relationship.hasRelationship(toType: "address")
+            case "address":
+                addressHasUserRelationship = relationship.hasRelationship(toType: "user")
+            default:
+                // For now we are only handling these 2 cases
+                break
+            }
+        }
+        
+        XCTAssertTrue(userHasAdressRelationship, "Expected user to have a relationship to addess")
+        XCTAssertTrue(addressHasUserRelationship, "Expected address to have a relationship to a user")
+    }
+    
 //
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -107,4 +138,10 @@ class JSONAPIDocumentTests: XCTestCase {
         }
     }
 
+}
+
+private extension JSONAPIRelationship {
+    func hasRelationship(toType type: String) -> Bool {
+        return resources.first?.relationships.contains(where: { $0.type == type }) == true
+    }
 }

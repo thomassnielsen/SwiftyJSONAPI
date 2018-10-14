@@ -1,0 +1,72 @@
+{
+    "data":[
+       {
+          "type":"profile",
+          "id":"1",
+          "attributes":{
+             "type":"member"
+          },
+          "relationships":{
+             "user":{
+                "data":[
+                   {
+                      "type":"user",
+                      "id":"32"
+                   }
+                ]
+             },
+             "address":{
+                "data":[
+                   {
+                      "type":"address",
+                      "id":"5"
+                   }
+                ]
+             }
+          }
+       }
+    ],
+    "included":[
+       {
+          "type":"user",
+          "id":"32",
+          "attributes":{
+             "first-name":"Johnny",
+             "last-name":"Appleseed",
+             "twitter":"jappleseed"
+          },
+          "relationships":{
+             "address":{
+                "data":{
+                   "type":"address",
+                   "id":"5"
+                }
+             }
+          }
+       },
+       {
+          "type":"address",
+          "id":"5",
+          "attributes":{
+             "street":"Apple tree lane"
+          },
+          "relationships":{
+             "user":{
+                "data":{
+                   "type":"user",
+                   "id":"32"
+                }
+             }
+          }
+       }
+    ],
+    "meta":{
+       "copyright":"Copyright 2015 Example Corp.",
+       "authors":[
+          "Yehuda Katz",
+          "Steve Klabnik",
+          "Dan Gebhardt",
+          "Tyler Kellen"
+       ]
+    }
+}

@@ -14,6 +14,9 @@ public enum JSONAPIResourceLoaded {
     case NotLoaded
 }
 
+typealias ResourceType = String
+typealias ResourceIds = Set<String>
+typealias CachedResources = [ResourceType : ResourceIds]
 
 public class JSONAPIResource: JSONPrinter {
     public var id = ""
@@ -94,21 +97,53 @@ public class JSONAPIResource: JSONPrinter {
     
     func loadResources(withIncludedResources includedResources: ResourcesByTypeAndId) {
         
-        for relationship in self.relationships {
-            
-            for resource in relationship.resources {
+        func _loadResources(withIncludedResources includedResources: ResourcesByTypeAndId, cachedResources: inout CachedResources) {
+            for relationship in self.relationships {
                 
-                guard let includedResource = includedResources[resource] else { continue }
-                
-                resource.attributes    = includedResource.attributes
-                resource.relationships = includedResource.relationships
-                
-                if !resource.relationships.isEmpty {
-                    resource.parent = self.parent
-                    resource.loadResources(withIncludedResources: includedResources)
+                for resource in relationship.resources {
+                    
+                    guard let includedResource = includedResources[resource] else { continue }
+                    
+                    resource.attributes    = includedResource.attributes
+                    resource.relationships = includedResource.relationships
+                    
+                    
+                    if !resource.relationships.isEmpty, resource.cacheIfNeeded(&cachedResources) {
+                        
+                        resource.parent = self.parent
+                        _loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
+                    }
+                    
+                    resource.loaded = .Loaded
                 }
-                resource.loaded = .Loaded
             }
+        }
+        
+        var cachedResources = CachedResources()
+        _loadResources(withIncludedResources: includedResources, cachedResources: &cachedResources)
+    }
+}
+
+private extension JSONAPIResource {
+    
+    // Checks if a resource has been loaded already, prevents bidirectional relationships from being recursively called
+    @discardableResult func cacheIfNeeded(_ cache: inout CachedResources) -> Bool {
+        
+        if var cachedIds = cache[type] {
+            
+            if cachedIds.contains(id) {
+                
+                return false
+            } else {
+                
+                cachedIds.insert(id)
+                cache[type] = cachedIds
+                return true
+            }
+        } else {
+            
+            cache[type] = [id]
+            return true
         }
     }
 }
